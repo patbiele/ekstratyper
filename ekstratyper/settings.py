@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
-import os
+import os, dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,7 +25,10 @@ SECRET_KEY = 'qe!4lm*ss--vq#_srkk0%=x(ys03$eb6qir+&^n%9&j=gyj)3^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['ekstratyper.herokuapp.com']
+try:
+    from .local_settings import *
+except ImportError as e:
+    ALLOWED_HOSTS = ['ekstratyper.herokuapp.com']
 
 
 # Application definition
@@ -77,6 +80,7 @@ WSGI_APPLICATION = 'ekstratyper.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -86,14 +90,14 @@ DATABASES = {
         'HOST': 'localhost',
         'PORT': '5432',
     },
-    # 'mysql': {
-    #     'ENGINE': 'django.db.backends.mysql',
-    #     'NAME': 'ekstratyper_db',
-    #     'USER': 'ekstratyper',
-    #     'PASSWORD': 'Mysql:9876',
-    #     'HOST': 'localhost',
-    #     'PORT': '3306',
-    # },
+    'mysql': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'ekstratyper_db',
+        'USER': 'ekstratyper',
+        'PASSWORD': 'Mysql:9876',
+        'HOST': 'localhost',
+        'PORT': '3306',
+    },
     'postgresql': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'ekstratyper_pg',
@@ -104,6 +108,9 @@ DATABASES = {
     }
 }
 
+#heroku db
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
