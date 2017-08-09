@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}Głosowanie - Kolejka {{ param.0 }}{% endblock %}
+
+{% block content %}
+<a href="{% url 'bet' round=param.0 group_id=param.1 %}">Obstaw</a>
+<div class="'info">{{ vote_info }}</div>
+<form class="vote" action="{% url 'vote' round=param.0 group_id=param.1 %}" method="POST">
+    {% csrf_token %}
+    {{ form }}
+    <div class="betRisk"><button class="bet" type="submit">Save</button></div>
+</form>
+{% endblock %}

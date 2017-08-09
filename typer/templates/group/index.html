@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load extra_tags %}
+
+{% block title %}Grupa: {{ group }}{% endblock %}
+
+{% block content %}
+{% load tz %}
+<h1>{{ group }}</h1>
+<h2>{{ group.league.league_name }}: <a href="{% url 'bets/all' group_id=group.id %}">Zobacz typy całego sezonu</a></h2>
+<div class="divTable">
+    <div class="divTableBody">
+        {% for member in members %}
+        <div class="divTableRow">
+            <div class="divTableCell">{{ member.member.get_display_name }}</div>
+            <div class="divTableCell">{{ member.points }}</div>
+            <div class="divTableCell">
+                <a href="{% url 'bets/member' group_id=group.id member_id=member.member.id %}">Zobacz jego typy</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<div class="divTable">
+    <div class="divTableBody">
+{% for round in max_rounds %}
+        <div class="divTableRow">
+            <div class="divTableHeadRound">
+                Kolejka {{ round }}
+            </div>
+            <div class="divTableHeadRound">
+                <a href="{% url 'bet' group_id=group.id round=round %}">Typuj</a>
+                {% if group.is_vote %}
+                    {% if round >= current_vote_round %}
+                    <a href="{% url 'vote' group_id=group.id round=round %}">Głosuj</a>
+                    {% endif %}
+                {% endif %}
+                    <a href="{% url 'bets/round' group_id=group.id round=round %}">Wyniki</a>
+            </div>
+        </div>
+        {% localtime on %}
+        {% for game in games|index:forloop.counter0 %}
+        <div class="divTableRow">
+            <div class="divTableCell">
+                {{ game.game_date }}
+            </div>
+            <div class="divTableCell">
+                {{ game }}
+            </div>
+            <div class="divTableCell" {% if game.is_game_soon %}style="color:indianred"{% endif %}>
+                {% if game.is_game_soon %}
+                    Wkrótce!
+                {% elif game.was_game_started %}
+                    W trakcie!
+                {% elif game.was_game_finished %}
+                    <a href="{% url 'bets/game' group_id=group.id game_id=game.id %}">Wyniki</a>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+        {% endlocaltime %}
+
+{% endfor %}
+    </div>
+</div>
+{% endblock %}

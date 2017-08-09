@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}Obstawianie - Kolejka {{ round }}{% endblock %}
+
+{% block content %}
+
+<form class="bet" action="{% url 'bet' round=round group_id=group.id %}" method="POST">
+    {% csrf_token %}
+    {% if group.is_vote %}
+        {% if vote_still_open %}
+            <div class="info"><a href="{% url 'vote' round=round group_id=group.id %}">{{ vote_still_open }}</a></div>
+        {% endif %}
+    {% endif %}
+    {{ formset.management_form }}
+    <div class="betTable">
+        <div class="betBody">
+            {% for form in formset %}
+            <div class="betRow">
+                <div class="betCellTeam" align="right">
+                    {{ form.home_bet.label_tag }}
+                </div>
+                <div class="betCell">
+                    {{ form.home_bet }}
+                </div>
+                <div class="betCell">
+                    {{ form.away_bet }}
+                </div>
+                <div class="betCellTeam">
+                    {{ form.away_bet.label_tag }}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% if risk %}<div class="betRisk">{{ risk }}</div>
+    {% else %}<div class="betRisk">{{ unchangeable_risk }}</div>
+    {% endif %}
+    <div class="betRiskInfo">{{ risk_info }}</div>
+    <div class="betRisk">
+        <button class="bet" type="submit">Zapisz</button>
+    </div>
+</form>
+    <div class="betRisk">
+        <button onclick="location.href='{% url 'group' group_id=group.id %}'">Wróć</button>
+    </div>
+
+{% endblock %}

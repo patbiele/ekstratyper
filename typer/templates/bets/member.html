@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load extra_tags %}
+
+{% block title %}Wyniki {{ bets.0.bettor }}{% endblock %}
+
+{% block content %}
+<div class="divTable">
+        <div class="divTableBody">
+            <div class="divTableRow">
+            <div class="divTableHead">Kolejka</div>
+            <div class="divTableHead">Mecz</div>
+            <div class="divTableHead">Wynik</div>
+            <div class="divTableHead">Punkty</div>
+            <div class="divTableHead">Pewniak</div>
+            <div class="divTableHead">Bonus</div>
+        </div>
+            {% for bet in bets %}
+            {% if bet.game.was_game_finished %}
+            <div class="divTableRow">
+                <div class="divTableCell">
+                    {{ bet.game.round }}
+                </div>
+                <div class="divTableCell">
+                    {{ bet.game }}
+                </div>
+                <div class="divTableCell">
+                    {{ bet.home_bet }}:{{ bet.away_bet }}
+                </div>
+                <div class="divTableCell">
+                    {{ bet.points }}
+                </div>
+                <div class="divTableCell">
+                    {{ bet.is_risk|yesno:"Tak," }}
+                </div>
+                <div class="divTableCell">
+                    {{ bet.is_bonus|yesno:"Tak," }}
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+<div><a href="{% url 'group' group_id=group_id %}">Wróć do grupy</a></div>
+
+{% endblock %}

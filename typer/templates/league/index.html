@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Liga: {{ league.league_name }}{% endblock %}
+
+{% block content %}
+
+
+<h1>{{ league.league_name }}</h1>
+<table>
+    <tr>
+        <th>Place</th>
+        <th>Name</th>
+        <th>Short</th>
+    </tr>
+{% for team in league.team_set.all %}
+    <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ team.team_name }}</td>
+        <td>{{ team.short_name }}</td>
+    </tr>
+{% endfor %}
+</table>
+
+{% for game in games %}
+    {% if forloop.counter|add:7|divisibleby:8 %}
+        <h2>Kolejka {{ game.round }}</h2>
+    {% endif %}
+    <div>{{ game }}
+    {% if game.is_game_soon %}
+        wkrótce
+    {% endif %}
+    </div>
+{% endfor %}
+
+{% endblock %}

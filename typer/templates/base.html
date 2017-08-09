@@ -1,0 +1,31 @@
+{% load staticfiles %}
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'typer/css/base.css' %}"/>
+<html>
+    <head>
+        <title>
+            Ekstratyper
+            {% block title %}
+            {% endblock %}
+        </title>
+    </head>
+    <body>
+        <div class="top">
+            <div class="hello">
+                Witaj
+                {% if user.id != None %}
+                    {{ user.get_display_name }}
+                {% endif %}
+            </div>
+            <div class="time">Czas serwera: {% now 'Y-m-d H:i:sO' %}</div>
+            <div class="shortcuts">
+                <a href="{% url 'dashboard' %}">Dashboard</a>
+                <a href="{% url 'profile' %}">Profil</a>
+                {% if user.is_authenticated %}<a href="{% url 'logout' %}">Wyloguj</a>{% endif %}
+            </div>
+        </div>
+        {% block content %}
+        {% endblock %}
+    </body>
+</html>

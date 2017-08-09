@@ -1,0 +1,147 @@
+form.bet {
+    width: auto;
+    margin: 0 auto;
+}
+
+a {
+    color: black;
+}
+
+div.divTable {
+    display: table;
+    width: 100%;
+    margin: 0 auto;
+    border-spacing: 5px;
+}
+
+div.divTableBody {
+    display: table-row-group;
+}
+
+div.divTableRow {
+    display: table-row;
+}
+
+div.divTableCell {
+    display: table-cell;
+    padding: 2px 5px;
+    vertical-align: middle;
+    text-align: center;
+    border: 1px solid black;
+}
+
+div.divTableHead {
+    display: table-cell;
+    padding: 2px 5px;
+    vertical-align: middle;
+    font-weight: bold;
+    text-align: center;
+    border: 1px solid black;
+}
+
+div.divTableTitle {
+    padding: 2px 5px;
+    vertical-align: middle;
+    font-weight: bold;
+    text-align: center;
+}
+
+div.divTableHeadRound {
+    display: table-cell;
+    padding: 2px 5px;
+    vertical-align: middle;
+    font-weight: bold;
+    text-align: center;
+}
+
+div.betTable {
+    display: table;
+    width: 100%;
+    margin: 0 auto;
+    border-spacing: 5px;
+}
+
+div.betBody {
+    display: table-row-group;
+}
+
+div.betRow {
+    display: table-row;
+    border: 1px solid black;
+}
+
+div.betCell, div.betCellTeam {
+    display: table-cell;
+    padding: 2px 5px;
+    vertical-align: middle;
+}
+
+div.betCellTeam {
+    width: 49%;
+    font-size: 2.5vw;
+    border: 1px solid black;
+}
+
+div.top {
+    padding: 2px 5px;
+    background-color: forestgreen;
+    overflow-x:hidden;
+    color: white;
+}
+a.top a:link, .top a:visited {
+    color: white;
+}
+
+div.hello {
+    float: left;
+    width: 50%;
+    display: inline-block;
+    text-align: left;
+}
+
+div.time, div.shortcuts {
+    float: right;
+    width: 50%;
+    text-align: right;
+    display: inline-block;
+}
+
+div.betRiskInfo, div.betRisk {
+    display: table;
+    width: auto;
+    margin: 0 auto;
+    border-spacing: 5px;
+    padding: 2px 5px;
+}
+
+div.betRiskInfo {
+    color: indianred;
+}
+input[type=number] {
+    text-align: center;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    -webkit-border-radius: 5;
+    -moz-border-radius: 5;
+    border-radius: 5px;
+}
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+button {
+    -webkit-border-radius: 5;
+    -moz-border-radius: 5;
+    border-radius: 5px;
+    background-color: forestgreen;
+    border: 2px solid green;
+    color: white;
+}
+
+select {
+    -webkit-border-radius: 5;
+    -moz-border-radius: 5;
+    border-radius: 5px;
+    background-color: palegreen;
+}

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+
+{% for member_in_group in member_in_groups %}
+<div class="group"><a href="{% url 'group' group_id=member_in_group.group.id %}">{{ member_in_group.group }}</a>
+    <div class="league">
+        {{ member_in_group.group.league }}
+        <div class="games">Nadchodzące mecze w tej grupie:
+        {% for game in member_in_group.group.league.game_set.all %}
+            {% if game.is_game_soon %}
+            <li>{{ game.game_date }} {{ game.home_team.short_name }}:{{ game.away_team.short_name }}</li>
+            {% endif %}
+        {% endfor %}
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load extra_tags %}
+
+{% block title %}Wyniki grupy {{ games.0.round }}{% endblock %}
+
+{% block content %}
+{% for round in rounds %}
+<h2>Kolejka {{ round }}</h2>
+
+    <div class="divTable">
+        <div class="divTableBody">
+            {% for bet in bets|index:forloop.counter0 %}
+            {% if bet.game.was_game_finished %}
+            <div class="divTableRow">
+                <div class="divTableCell">
+                    {{ bet.game }}
+                </div>
+                <div class="divTableCell">
+                    {{ bet.bettor }}
+                </div>
+                <div class="divTableCell">
+                    {{ bet.home_bet }}:{{ bet.away_bet }}
+                </div>
+                <div class="divTableCell">
+                    {{ bet.points }}
+                </div>
+                <div class="divTableCell">
+                    {{ bet.is_risk|yesno:"Pewniak," }}
+                </div>
+                <div class="divTableCell">
+                    {{ bet.is_bonus|yesno:"+1 za mecz," }}
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endfor %}
+<div><a href="{% url 'group' group_id=group_id %}">Wróć do grupy</a></div>
+
+{% endblock %}

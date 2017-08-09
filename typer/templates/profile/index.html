@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load extra_tags %}
+
+{% block title %}Grupa: {{ group }}{% endblock %}
+
+{% block content %}
+
+<li><a href="{% url 'profile/alias' %}">Zmień alias</a></li>
+<li><a href="{% url 'profile/pass' %}">Zmień hasło</a></li>
+
+{% endblock %}
