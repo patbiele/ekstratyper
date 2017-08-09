@@ -25,7 +25,7 @@ SECRET_KEY = 'qe!4lm*ss--vq#_srkk0%=x(ys03$eb6qir+&^n%9&j=gyj)3^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['ekstratyper.herokuapp.com']
 
 
 # Application definition
