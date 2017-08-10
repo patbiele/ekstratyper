@@ -28,7 +28,9 @@ DEBUG = True
 try:
     from .local_settings import *
 except ImportError as e:
-    ALLOWED_HOSTS = ['ekstratyper.herokuapp.com']
+    heroku = True
+else:
+    heroku = False
 
 
 # Application definition
@@ -76,41 +78,17 @@ TEMPLATE_CONTEXT_PROCESSORS = 'django.core.context_processors.request'
 
 WSGI_APPLICATION = 'ekstratyper.wsgi.application'
 
+# Allowed hosts
+if heroku:
+    ALLOWED_HOSTS = ['ekstratyper.herokuapp.com']
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
-
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'ekstratyper_pg',
-        'USER': 'ekstratyper',
-        'PASSWORD': 'Postgresql:9876',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    },
-    'mysql': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'ekstratyper_db',
-        'USER': 'ekstratyper',
-        'PASSWORD': 'Mysql:9876',
-        'HOST': 'localhost',
-        'PORT': '3306',
-    },
-    'postgresql': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'ekstratyper_pg',
-        'USER': 'ekstratyper',
-        'PASSWORD': 'Postgresql:9876',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
-}
-
-#heroku db
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
+if heroku:
+    DATABASES = {}
+    #heroku db
+    db_from_env = dj_database_url.config(conn_max_age=500)
+    DATABASES['default']=db_from_env
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
