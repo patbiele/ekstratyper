@@ -85,7 +85,7 @@ if heroku:
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 if heroku:
-    DATABASES = {'default': dj_database_url.config(default='postgres://user:pass@localhost/dbname', conn_max_age=500)}
+    DATABASES = {'default': dj_database_url}
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
