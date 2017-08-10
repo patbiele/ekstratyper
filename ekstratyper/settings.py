@@ -84,8 +84,19 @@ if heroku:
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
-if not heroku:
-    DATABASES = {'default': dj_database_url}
+if heroku:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'd8rkvq0j5ri16c',
+            'USER': 'axtqlryuiofbat',
+            'PASSWORD': 'e2e01621e5340155de91534e121252e08e46f2dd301d27bcb2ccd0f437a09d46',
+            'HOST': 'ec2-54-247-92-185.eu-west-1.compute.amazonaws.com',
+            'PORT': '5432',
+        }
+    }
+    
+    DATABASES['default'] =  dj_database_url.config()
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
