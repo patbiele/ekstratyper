@@ -84,7 +84,7 @@ if heroku:
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
-if heroku:
+if not heroku:
     DATABASES = {'default': dj_database_url}
 
 # Password validation
