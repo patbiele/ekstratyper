@@ -5,6 +5,7 @@
 
 {% block content %}
 <h2>Kolejka {{ games.0.round }}</h2>
+<div><a href="{% url 'group' group_id=group_id %}">Wróć do grupy</a></div>
 {% for game in games %}
 <div class="divTableTitle">{{ game }}</div>
 {% if game.was_game_finished %}
@@ -28,11 +29,11 @@
             <div class="divTableCell">
                 {{ bet.points }}
             </div>
-            <div class="divTableCell">
-                {{ bet.is_risk|yesno:"Tak,Nie" }}
+            <div class="divTableCell" style="{% if bet.is_risk %} color:green {% else %} color: red {% endif %}">
+                {{ bet.is_risk|yesno:"✓,✗" }}
             </div>
-            <div class="divTableCell">
-                {{ bet.is_bonus|add:0 }}
+            <div class="divTableCell" style="{% if bet.is_bonus %} color:green {% else %} color: red {% endif %}">
+                {{ bet.is_bonus|yesno:"✓,✗" }}
             </div>
         </div>
         {% endfor %}

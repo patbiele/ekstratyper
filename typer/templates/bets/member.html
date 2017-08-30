@@ -4,6 +4,7 @@
 {% block title %}Wyniki {{ bets.0.bettor }}{% endblock %}
 
 {% block content %}
+<div><a href="{% url 'group' group_id=group_id %}">Wróć do grupy</a></div>
 <div class="divTable">
         <div class="divTableBody">
             <div class="divTableRow">
@@ -29,11 +30,11 @@
                 <div class="divTableCell">
                     {{ bet.points }}
                 </div>
-                <div class="divTableCell">
-                    {{ bet.is_risk|yesno:"Tak," }}
+                <div class="divTableCell" style="{% if bet.is_risk %} color:green {% else %} color: red {% endif %}">
+                    {{ bet.is_risk|yesno:"✓,✗" }}
                 </div>
-                <div class="divTableCell">
-                    {{ bet.is_bonus|yesno:"Tak," }}
+                <div class="divTableCell" style="{% if bet.is_bonus %} color:green {% else %} color: red {% endif %}">
+                    {{ bet.is_bonus|yesno:"✓,✗" }}
                 </div>
             </div>
             {% endif %}

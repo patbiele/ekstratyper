@@ -26,11 +26,12 @@ def group(request, group_id):
         MemberGroup.objects.get(group_id=group_id, member_id=request.user.id)
     except MemberGroup.DoesNotExist:
         return redirect('dashboard')
-    max_rounds = group.league.game_set.values_list('round', flat=True).distinct().order_by('round')
 
     # get closest game to current datetime
     current_round = Game.objects.values_list('round', flat=True).filter(league_id=group.league.id,
                                                                      game_date__gt=datetime.datetime.now()).order_by('game_date')[0]
+
+    max_rounds = group.league.game_set.values_list('round', flat=True).distinct().filter(round__gte=(current_round-1)).order_by('round')
     # get only games starting from previous round
     games = [Game.objects.filter(round=r, league_id=group.league.id, round__gte=(current_round-1)).order_by('game_date') for r in max_rounds]
     members = MemberGroup.objects.filter(group_id=group_id).order_by('-points')
@@ -45,6 +46,7 @@ def group(request, group_id):
                     sum_up_points(group_id)
 
     context = {'group':group, 'members':members, 'games':games, 'max_rounds':max_rounds}
+    if current_round > 2: context.update({'previous_rounds':range(1,current_round-1)})
     if group.is_vote:
         current_vote_round = lowest_round_open_for_vote(group)
         context.update({'current_vote_round':current_vote_round})
@@ -324,5 +326,8 @@ def dashboard(request):
         member_in_groups = MemberGroup.objects.filter(member_id=request.user.id)
     except MemberGroup.DoesNotExist:
         member_in_groups = 'Nie należysz do żadnej grupy'
+
+    if member_in_groups.count() == 1:
+        return redirect('group', member_in_groups.first().group_id)
 
     return render(request, 'index.html', {'member_in_groups':member_in_groups})

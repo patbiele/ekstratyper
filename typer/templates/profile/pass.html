@@ -1,11 +1,13 @@
 {% extends 'base.html' %}
 
-{% block title %}Zmiana hasła{% endblock %}
+{% block title %}Ustawienia użytkownika - Zmiana hasła{% endblock %}
 
 {% block content %}
+
+<h1>Edytuj hasło</h1>
 <form method="post">
-  {% csrf_token %}
-  {{ form }}
-  <button type="submit">Save changes</button>
+    {% csrf_token %}
+    {{ form }}
+    <button type="submit">Zapisz</button>
 </form>
 {% endblock %}

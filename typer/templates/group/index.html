@@ -5,12 +5,12 @@
 
 {% block content %}
 {% load tz %}
-<h1>{{ group }}</h1>
-<h2>{{ group.league.league_name }}: <a href="{% url 'bets/all' group_id=group.id %}">Zobacz typy całego sezonu</a></h2>
+<h2 align="center">{{ group }} - {{ group.league.league_name }}: <a href="{% url 'bets/all' group_id=group.id %}">Zobacz typy całego sezonu</a></h2>
 <div class="divTable">
     <div class="divTableBody">
         {% for member in members %}
         <div class="divTableRow">
+            <div class="divTableCell">{{ forloop.counter }}.</div>
             <div class="divTableCell">{{ member.member.get_display_name }}</div>
             <div class="divTableCell">{{ member.points }}</div>
             <div class="divTableCell">
@@ -20,13 +20,11 @@
         {% endfor %}
     </div>
 </div>
+<hr>
 <div class="divTable">
     <div class="divTableBody">
-{% for round in max_rounds %}
+    {% for round in max_rounds %}
         <div class="divTableRow">
-            <div class="divTableHeadRound">
-                Kolejka {{ round }}
-            </div>
             <div class="divTableHeadRound">
                 <a href="{% url 'bet' group_id=group.id round=round %}">Typuj</a>
                 {% if group.is_vote %}
@@ -34,7 +32,12 @@
                     <a href="{% url 'vote' group_id=group.id round=round %}">Głosuj</a>
                     {% endif %}
                 {% endif %}
-                    <a href="{% url 'bets/round' group_id=group.id round=round %}">Wyniki</a>
+            </div>
+            <div class="divTableHeadRound">
+                Kolejka {{ round }}.
+            </div>
+            <div class="divTableHeadRound">
+                <a href="{% url 'bets/round' group_id=group.id round=round %}">Wyniki</a>
             </div>
         </div>
         {% localtime on %}
@@ -46,7 +49,7 @@
             <div class="divTableCell">
                 {{ game }}
             </div>
-            <div class="divTableCell" {% if game.is_game_soon %}style="color:indianred"{% endif %}>
+            <div class="divTableCell">
                 {% if game.is_game_soon %}
                     Wkrótce!
                 {% elif game.was_game_started %}
@@ -62,4 +65,23 @@
 {% endfor %}
     </div>
 </div>
+<hr>
+{% if previous_rounds %}
+    <div class="divTable">
+        <div class="divTableBody">
+            <div class="divTableRow">
+                <div class="divTableCell">
+                    Poprzednie kolejki:
+                </div>
+                    {% for round in previous_rounds %}
+                        <div class="divTableCell">
+                            {{ round }}.
+                            <a href="{% url 'bet' group_id=group.id round=round %}" title="Moje typy">T</a>
+                            <a href="{% url 'bets/round' group_id=group.id round=round %}" title="Wyniki kolejki">W</a>
+                        </div>
+                    {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endif %}
 {% endblock %}
