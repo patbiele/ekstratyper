@@ -8,13 +8,21 @@
 <h2 align="center">{{ group }} - {{ group.league.league_name }}: <a href="{% url 'bets/all' group_id=group.id %}">Zobacz typy całego sezonu</a></h2>
 <div class="divTable">
     <div class="divTableBody">
+        <div class="divTableRow">
+            <div class="divTableCell">#</div>
+            <div class="divTableCell">Gracz</div>
+            <div class="divTableCell">Suma punktów</div>
+            <div class="divTableCell">Punkty z {{ current_round|add:-1 }}. kolejki</div>
+            <div class="divTableCell">Typy</div>
+        </div>
         {% for member in members %}
         <div class="divTableRow">
             <div class="divTableCell">{{ forloop.counter }}.</div>
             <div class="divTableCell">{{ member.member.get_display_name }}</div>
             <div class="divTableCell">{{ member.points }}</div>
+            <div class="divTableCell">{{ member.previous_round }}</div>
             <div class="divTableCell">
-                <a href="{% url 'bets/member' group_id=group.id member_id=member.member.id %}">Zobacz jego typy</a>
+                <a href="{% url 'bets/member' group_id=group.id member_id=member.member.id %}">Zobacz</a>
             </div>
         </div>
         {% endfor %}

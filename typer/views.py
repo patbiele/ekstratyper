@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth import views as auth_views, update_session_auth_hash
 from django.contrib.auth.forms import SetPasswordForm
+from django.db.models import Value
 from django.http import HttpResponse
 from .forms import *
 from .helper import * # contains following libs
@@ -35,6 +36,12 @@ def group(request, group_id):
     # get only games starting from previous round
     games = [Game.objects.filter(round=r, league_id=group.league.id, round__gte=(current_round-1)).order_by('game_date') for r in max_rounds]
     members = MemberGroup.objects.filter(group_id=group_id).order_by('-points')
+    members.all().annotate(previous_round=Value(0))
+
+    for member in members:
+        previous_round_pts = Bet.objects.values_list('points', flat=True).filter(bettor=member.member, game__round=current_round-1, group_id=group_id).aggregate(Sum('points'))['points__sum']
+        previous_round_pts += Bet.objects.filter(bettor=member.member, game__round=current_round-1, group_id=group_id, is_bonus=True).count()
+        member.previous_round=previous_round_pts if previous_round_pts else 0
 
     for round in games:
         if round.exclude(score_home=None):
@@ -45,7 +52,7 @@ def group(request, group_id):
                     score_bonus_game(group_id, game.id)
                     sum_up_points(group_id)
 
-    context = {'group':group, 'members':members, 'games':games, 'max_rounds':max_rounds}
+    context = {'group':group, 'members':members, 'games':games, 'max_rounds':max_rounds, 'current_round':current_round}
     if current_round > 2: context.update({'previous_rounds':range(1,current_round-1)})
     if group.is_vote:
         current_vote_round = lowest_round_open_for_vote(group)

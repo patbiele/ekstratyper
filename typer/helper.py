@@ -164,5 +164,4 @@ def score_points(game):
         bet.save()
 
 def scraper(round):
-    # response = req.get('http://www.gol24.pl/ekstraklasa/terminarz/')
-    round_text = str.round+'. kolejka'
+    pass
