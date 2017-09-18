@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="f48c2942-4407-4718-b9de-9e34a1795a95" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/typer/helper.py" afterPath="$PROJECT_DIR$/typer/helper.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/typer/templates/group/index.html" afterPath="$PROJECT_DIR$/typer/templates/group/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/typer/views.py" afterPath="$PROJECT_DIR$/typer/views.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -20,23 +18,23 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/typer/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="705">
-              <caret line="54" column="105" lean-forward="false" selection-start-line="54" selection-start-column="105" selection-end-line="54" selection-end-column="105" />
+            <state relative-caret-position="435">
+              <caret line="36" column="106" lean-forward="false" selection-start-line="36" selection-start-column="106" selection-end-line="36" selection-end-column="106" />
               <folding>
                 <element signature="e#24#63#0" expanded="true" />
-                <element signature="e#534#914#0" expanded="false" />
-                <element signature="e#3155#3421#0" expanded="false" />
-                <element signature="e#3462#9029#0" expanded="false" />
-                <element signature="e#9203#9608#0" expanded="false" />
-                <element signature="e#9651#9700#0" expanded="false" />
-                <element signature="e#9742#11927#0" expanded="false" />
-                <element signature="e#11963#12325#0" expanded="false" />
-                <element signature="e#12933#13455#0" expanded="false" />
-                <element signature="e#13515#13882#0" expanded="false" />
-                <element signature="e#13921#14721#0" expanded="false" />
+                <element signature="e#539#919#0" expanded="false" />
+                <element signature="e#3341#3607#0" expanded="false" />
+                <element signature="e#3648#9215#0" expanded="false" />
+                <element signature="e#9389#9794#0" expanded="false" />
+                <element signature="e#9837#9886#0" expanded="false" />
+                <element signature="e#9928#12113#0" expanded="false" />
+                <element signature="e#12149#12511#0" expanded="false" />
+                <element signature="e#13119#13641#0" expanded="false" />
+                <element signature="e#13701#14068#0" expanded="false" />
+                <element signature="e#14107#14907#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -45,14 +43,14 @@
       <file leaf-file-name="helper.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/typer/helper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="446">
-              <caret line="100" column="137" lean-forward="true" selection-start-line="100" selection-start-column="137" selection-end-line="101" selection-end-column="103" />
+            <state relative-caret-position="1455">
+              <caret line="100" column="137" lean-forward="false" selection-start-line="100" selection-start-column="137" selection-end-line="101" selection-end-column="103" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/typer/templates/group/index.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="210">
@@ -204,8 +202,8 @@
         <option value="$PROJECT_DIR$/typer/templates/profile/alias.html" />
         <option value="$PROJECT_DIR$/typer/templates/profile/pass.html" />
         <option value="$PROJECT_DIR$/typer/helper.py" />
-        <option value="$PROJECT_DIR$/typer/views.py" />
         <option value="$PROJECT_DIR$/typer/templates/group/index.html" />
+        <option value="$PROJECT_DIR$/typer/views.py" />
       </list>
     </option>
   </component>
@@ -216,10 +214,10 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="38" />
-    <option name="y" value="18" />
-    <option name="width" value="1242" />
-    <option name="height" value="1006" />
+    <option name="x" value="659" />
+    <option name="y" value="39" />
+    <option name="width" value="621" />
+    <option name="height" value="985" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -617,7 +615,7 @@
     <option name="totallyTimeSpent" value="11164000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="38" y="18" width="1242" height="1006" extended-state="6" />
+    <frame x="659" y="39" width="621" height="985" extended-state="4" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27858293" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -910,7 +908,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="10" column="32" lean-forward="false" selection-start-line="10" selection-start-column="32" selection-end-line="10" selection-end-column="32" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -975,29 +972,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/typer/helper.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="446">
-          <caret line="100" column="137" lean-forward="true" selection-start-line="100" selection-start-column="137" selection-end-line="101" selection-end-column="103" />
+        <state relative-caret-position="1455">
+          <caret line="100" column="137" lean-forward="false" selection-start-line="100" selection-start-column="137" selection-end-line="101" selection-end-column="103" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/typer/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="705">
-          <caret line="54" column="105" lean-forward="false" selection-start-line="54" selection-start-column="105" selection-end-line="54" selection-end-column="105" />
-          <folding>
-            <element signature="e#24#63#0" expanded="true" />
-            <element signature="e#534#914#0" expanded="false" />
-            <element signature="e#3155#3421#0" expanded="false" />
-            <element signature="e#3462#9029#0" expanded="false" />
-            <element signature="e#9203#9608#0" expanded="false" />
-            <element signature="e#9651#9700#0" expanded="false" />
-            <element signature="e#9742#11927#0" expanded="false" />
-            <element signature="e#11963#12325#0" expanded="false" />
-            <element signature="e#12933#13455#0" expanded="false" />
-            <element signature="e#13515#13882#0" expanded="false" />
-            <element signature="e#13921#14721#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1006,6 +983,26 @@
         <state relative-caret-position="210">
           <caret line="14" column="70" lean-forward="false" selection-start-line="14" selection-start-column="70" selection-end-line="14" selection-end-column="70" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/typer/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="36" column="106" lean-forward="false" selection-start-line="36" selection-start-column="106" selection-end-line="36" selection-end-column="106" />
+          <folding>
+            <element signature="e#24#63#0" expanded="true" />
+            <element signature="e#539#919#0" expanded="false" />
+            <element signature="e#3341#3607#0" expanded="false" />
+            <element signature="e#3648#9215#0" expanded="false" />
+            <element signature="e#9389#9794#0" expanded="false" />
+            <element signature="e#9837#9886#0" expanded="false" />
+            <element signature="e#9928#12113#0" expanded="false" />
+            <element signature="e#12149#12511#0" expanded="false" />
+            <element signature="e#13119#13641#0" expanded="false" />
+            <element signature="e#13701#14068#0" expanded="false" />
+            <element signature="e#14107#14907#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth import views as auth_views, update_session_auth_hash
 from django.contrib.auth.forms import SetPasswordForm
-from django.db.models import Value
+from django.db.models import Value, Max
 from django.http import HttpResponse
 from .forms import *
 from .helper import * # contains following libs
@@ -30,7 +30,11 @@ def group(request, group_id):
 
     # get closest game to current datetime
     current_round = Game.objects.values_list('round', flat=True).filter(league_id=group.league.id,
-                                                                     game_date__gt=datetime.datetime.now()).order_by('game_date')[0]
+                                                                     game_date__gt=datetime.datetime.now()).order_by('game_date')
+    if (current_round):
+        current_round = current_round[0]
+    else:
+        current_round = Game.objects.filter(league_id=group.league.id).aggregate(Max('round'))['round__max']
 
     max_rounds = group.league.game_set.values_list('round', flat=True).distinct().filter(round__gte=(current_round-1)).order_by('round')
     # get only games starting from previous round
