@@ -298,9 +298,15 @@ def bets_single_round(request, group_id, round):
         return redirect('group', group_id)
     games = Game.objects.filter(round=round, league=mg.group.league, game_date__lt=timezone.now()).order_by('game_date')
     bets = [Bet.objects.filter(game=g, group_id=group_id).order_by('bettor') for g in games]
+    members = MemberGroup.objects.filter(group_id=group_id).order_by('member__alias')
+    members.all().annotate(round_points=Value(0))
+    for member in members:
+        round_points = Bet.objects.values_list('points', flat=True).filter(bettor=member.member, game__round=round, group_id=group_id).aggregate(Sum('points'))['points__sum']
+        if round_points:
+            round_points += Bet.objects.filter(bettor=member.member, game__round=round, group_id=group_id, is_bonus=True).count()
+        member.round_points = round_points if round_points else 0
 
-
-    return render(request, 'bets/round.html', {'bets':bets, 'games':games, 'group_id':group_id, 'bets_per_round':mg.group.bets_per_round})
+    return render(request, 'bets/round.html', {'bets':bets, 'games':games, 'group_id':group_id, 'bets_per_round':mg.group.bets_per_round, 'members':members})
 
 def bets_single_member(request, group_id, member_id):
     try:
@@ -325,10 +331,23 @@ def bets_all(request, group_id):
         else:
             max_round = current.round
 
+    members = MemberGroup.objects.filter(group_id=group_id).order_by('member__alias')
+    sum_points = []
+    for member in members:
+        sum_points.append([member.member.get_display_name(),member.points])
+        for round in range(1,max_round+1):
+            round_points = Bet.objects.values_list('points', flat=True).filter(
+                bettor=member.member, game__round=round, group_id=group_id).aggregate(Sum('points'))['points__sum']
+            if round_points:
+                round_points += Bet.objects.filter(bettor=member.member, game__round=round, group_id=group_id, is_bonus=True).count()
+            else:
+                round_points = 0
+            sum_points[-1].append(round_points)
+
     bets = [Bet.objects.filter(game__round=round, group_id=group_id, game__game_date__lt=timezone.now()).order_by('bettor', 'game__game_date')\
             for round in range(1,max_round+1)]
 
-    return render(request, 'bets/all.html', {'bets':bets, 'group_id':group_id, 'rounds':range(1,max_round+1)})
+    return render(request, 'bets/all.html', {'bets':bets, 'group_id':group_id, 'rounds':range(1,max_round+1), 'sum_points':sum_points})
 
 def dashboard(request):
     if request.user.is_anonymous():

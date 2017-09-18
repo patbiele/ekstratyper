@@ -4,6 +4,30 @@
 {% block title %}Wyniki grupy {{ games.0.round }}{% endblock %}
 
 {% block content %}
+<div><a href="{% url 'group' group_id=group_id %}">Wróć do grupy</a></div>
+
+<div class="divTable">
+    <div class="divTableBody">
+        <div class="divTableRow">
+            {% for col in sum_points.0 %}
+                {% if forloop.counter0 == 0 %}
+                <div class="divTableCell">Gracz</div>
+                {% elif forloop.counter0 == 1 %}
+                <div class="divTableCell">Punkty</div>
+                {% else %}
+                <div class="divTableCell">{{ forloop.counter0|add:-1 }}.</div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% for row in sum_points %}
+        <div class="divTableRow">
+        {% for col in row %}
+                <div class="divTableCell">{{ col }}</div>
+        {% endfor %}
+        </div>
+{% endfor %}
+    </div>
+</div>
 
 {% for round in rounds %}
 <h2>Kolejka {{ round }}</h2>

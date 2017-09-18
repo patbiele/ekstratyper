@@ -6,6 +6,22 @@
 {% block content %}
 <h2>Kolejka {{ games.0.round }}</h2>
 <div><a href="{% url 'group' group_id=group_id %}">Wróć do grupy</a></div>
+
+<div class="divTable">
+    <div class="divTableBody">
+        <div class="divTableRow">
+            <div class="divTableCell">Gracz</div>
+            <div class="divTableCell">Suma punktów</div>
+        </div>
+        {% for member in members %}
+        <div class="divTableRow">
+            <div class="divTableCell">{{ member.member.get_display_name }}</div>
+            <div class="divTableCell">{{ member.round_points }}</div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
 {% for game in games %}
 <div class="divTableTitle">{{ game }}</div>
 {% if game.was_game_finished %}
