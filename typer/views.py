@@ -44,6 +44,7 @@ def group(request, group_id):
 
     for member in members:
         previous_round_pts = Bet.objects.values_list('points', flat=True).filter(bettor=member.member, game__round=current_round-1, group_id=group_id).aggregate(Sum('points'))['points__sum']
+        if previous_round_pts is None: previous_round_pts = 0
         previous_round_pts += Bet.objects.filter(bettor=member.member, game__round=current_round-1, group_id=group_id, is_bonus=True).count()
         member.previous_round=previous_round_pts if previous_round_pts else 0
 
