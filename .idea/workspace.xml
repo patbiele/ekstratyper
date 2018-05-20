@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="f48c2942-4407-4718-b9de-9e34a1795a95" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/typer/urls.py" afterPath="$PROJECT_DIR$/typer/urls.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/typer/views.py" afterPath="$PROJECT_DIR$/typer/views.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -20,8 +22,8 @@
       <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/typer/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="21" column="1" lean-forward="true" selection-start-line="21" selection-start-column="1" selection-end-line="21" selection-end-column="1" />
+            <state relative-caret-position="180">
+              <caret line="15" column="80" lean-forward="false" selection-start-line="15" selection-start-column="80" selection-end-line="15" selection-end-column="80" />
               <folding />
             </state>
           </provider>
@@ -30,8 +32,8 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/typer/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-358">
-              <caret line="320" column="32" lean-forward="false" selection-start-line="320" selection-start-column="32" selection-end-line="320" selection-end-column="32" />
+            <state relative-caret-position="587">
+              <caret line="383" column="27" lean-forward="false" selection-start-line="383" selection-start-column="27" selection-end-line="383" selection-end-column="27" />
               <folding>
                 <element signature="e#24#63#0" expanded="true" />
               </folding>
@@ -92,18 +94,8 @@
       <file leaf-file-name="helper.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/typer/helper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-73">
+            <state relative-caret-position="211">
               <caret line="109" column="27" lean-forward="false" selection-start-line="109" selection-start-column="27" selection-end-line="109" selection-end-column="27" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="admin.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/typer/admin.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="17" column="28" lean-forward="false" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -191,10 +183,10 @@
         <option value="$PROJECT_DIR$/typer/helper.py" />
         <option value="$PROJECT_DIR$/typer/templates/group/index.html" />
         <option value="$PROJECT_DIR$/typer/templates/bets/all.html" />
-        <option value="$PROJECT_DIR$/typer/urls.py" />
         <option value="$PROJECT_DIR$/typer/templates/bets/round.html" />
         <option value="$PROJECT_DIR$/typer/templates/bets/member.html" />
         <option value="$PROJECT_DIR$/typer/templates/bets/stats.html" />
+        <option value="$PROJECT_DIR$/typer/urls.py" />
         <option value="$PROJECT_DIR$/typer/views.py" />
       </list>
     </option>
@@ -645,7 +637,14 @@
       <option name="project" value="LOCAL" />
       <updated>1526845502646</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Dodanie statystyk, zmiana w wyswietlaniu trwajacych meczy">
+      <created>1526845513079</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1526845513079</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -850,13 +849,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ekstratyper/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="16" column="32" lean-forward="false" selection-start-line="16" selection-start-column="32" selection-end-line="16" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/typer/templatetags/extra_tags.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -958,26 +950,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/typer/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="21" column="1" lean-forward="true" selection-start-line="21" selection-start-column="1" selection-end-line="21" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/typer/templates/bets/all.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="5" column="19" lean-forward="true" selection-start-line="5" selection-start-column="19" selection-end-line="6" selection-end-column="74" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/typer/helper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-73">
-          <caret line="109" column="27" lean-forward="false" selection-start-line="109" selection-start-column="27" selection-end-line="109" selection-end-column="27" />
           <folding />
         </state>
       </provider>
@@ -1022,10 +998,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/typer/helper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="211">
+          <caret line="109" column="27" lean-forward="false" selection-start-line="109" selection-start-column="27" selection-end-line="109" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ekstratyper/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="16" column="32" lean-forward="false" selection-start-line="16" selection-start-column="32" selection-end-line="16" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/typer/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="15" column="80" lean-forward="false" selection-start-line="15" selection-start-column="80" selection-end-line="15" selection-end-column="80" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/typer/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-358">
-          <caret line="320" column="32" lean-forward="false" selection-start-line="320" selection-start-column="32" selection-end-line="320" selection-end-column="32" />
+        <state relative-caret-position="587">
+          <caret line="383" column="27" lean-forward="false" selection-start-line="383" selection-start-column="27" selection-end-line="383" selection-end-column="27" />
           <folding>
             <element signature="e#24#63#0" expanded="true" />
           </folding>
