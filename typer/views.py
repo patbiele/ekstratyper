@@ -386,6 +386,9 @@ def bets_stats(request, group_id):
         for r in range(1,37):
             round_points = Bet.objects.values_list('points', flat=True).filter(bettor=member.member, game__round=r,
                                                 group_id=group_id).aggregate(Sum('points'))['points__sum']
+            if round_points:
+                round_points += Bet.objects.filter(bettor=member.member, game__round=r, group_id=group_id,
+                                                   is_bonus=True).count()
             round_points = round_points if round_points else 0
             if member.round_max_points < round_points:
                 member.round_max_points = round_points
@@ -407,11 +410,16 @@ def bets_stats(request, group_id):
                                              group_id=group_id, points__gt=0).aggregate(Sum('points'))['points__sum']/2
         member.riskless_points += Bet.objects.values_list('points', flat=True).filter(bettor=member.member, is_risk=False,
                                              group_id=group_id, points__gt=0).aggregate(Sum('points'))['points__sum']
+        member.riskless_points += Bet.objects.filter(bettor=member.member, group_id=group_id, is_bonus=True).count()
 
         member.lechia_points = Bet.objects.values_list('points', flat=True).filter(bettor=member.member,
                                          group_id=group_id, game__home_team=4).aggregate(Sum('points'))['points__sum']
         member.lechia_points += Bet.objects.values_list('points', flat=True).filter(bettor=member.member,
                                          group_id=group_id, game__away_team=4).aggregate(Sum('points'))['points__sum']
+        member.lechia_points += Bet.objects.filter(bettor=member.member, group_id=group_id, is_bonus=True,
+                                                   game__away_team=4).count()
+        member.lechia_points += Bet.objects.filter(bettor=member.member, group_id=group_id, is_bonus=True,
+                                                   game__home_team=4).count()
         member.lechia_for_count = Bet.objects.filter(bettor=member.member, group_id=group_id,
                                                      game__home_team=4, home_bet__gt=F('away_bet')).count()
         member.lechia_for_count += Bet.objects.filter(bettor=member.member, group_id=group_id,
@@ -440,6 +448,8 @@ def bets_stats(request, group_id):
         member.lechia_arka_points = Bet.objects.values_list('points', flat=True).filter(bettor=member.member,
                                                             group_id=group_id,game__home_team__in=[4,13],
                                                             game__away_team__in=[4,13]).aggregate(Sum('points'))['points__sum']
+        member.lechia_arka_points += Bet.objects.filter(bettor=member.member, group_id=group_id, is_bonus=True,
+                                                        game__home_team__in=[4,13], game__away_team__in=[4,13]).count()
         member.lechia_arka_for_count = Bet.objects.filter(bettor=member.member, group_id=group_id,
                                                      game__home_team=4, game__away_team=13, home_bet__gt=F('away_bet')).count()
         member.lechia_arka_for_count += Bet.objects.filter(bettor=member.member, group_id=group_id,
