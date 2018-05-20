@@ -386,6 +386,7 @@ def bets_stats(request, group_id):
         for r in range(1,37):
             round_points = Bet.objects.values_list('points', flat=True).filter(bettor=member.member, game__round=r,
                                                 group_id=group_id).aggregate(Sum('points'))['points__sum']
+            round_points = round_points if round_points else 0
             if member.round_max_points < round_points:
                 member.round_max_points = round_points
                 member.round_max = r
