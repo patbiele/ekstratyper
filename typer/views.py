@@ -381,6 +381,8 @@ def bets_stats(request, group_id):
 
         member.perfect_count = Bet.objects.filter(bettor=member.member, group_id=group_id, points__in=[3, 6]).count()
 
+        member.round_max_points = 0
+        member.round_min_points = 99
         for r in range(1,37):
             round_points = Bet.objects.values_list('points', flat=True).filter(bettor=member.member, game__round=r,
                                                 group_id=group_id).aggregate(Sum('points'))['points__sum']
