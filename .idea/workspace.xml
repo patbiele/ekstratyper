@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="f48c2942-4407-4718-b9de-9e34a1795a95" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/typer/models.py" afterPath="$PROJECT_DIR$/typer/models.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/typer/templates/group/index.html" afterPath="$PROJECT_DIR$/typer/templates/group/index.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -80,11 +80,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/typer/models.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="556">
               <caret line="79" column="46" lean-forward="false" selection-start-line="79" selection-start-column="46" selection-end-line="79" selection-end-column="46" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/typer/templates/group/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="465">
+              <caret line="64" column="48" lean-forward="true" selection-start-line="64" selection-start-column="48" selection-end-line="64" selection-end-column="48" />
               <folding />
             </state>
           </provider>
@@ -181,7 +191,6 @@
         <option value="$PROJECT_DIR$/typer/templates/profile/alias.html" />
         <option value="$PROJECT_DIR$/typer/templates/profile/pass.html" />
         <option value="$PROJECT_DIR$/typer/helper.py" />
-        <option value="$PROJECT_DIR$/typer/templates/group/index.html" />
         <option value="$PROJECT_DIR$/typer/templates/bets/all.html" />
         <option value="$PROJECT_DIR$/typer/templates/bets/round.html" />
         <option value="$PROJECT_DIR$/typer/templates/bets/member.html" />
@@ -189,6 +198,7 @@
         <option value="$PROJECT_DIR$/typer/templates/bets/stats.html" />
         <option value="$PROJECT_DIR$/typer/views.py" />
         <option value="$PROJECT_DIR$/typer/models.py" />
+        <option value="$PROJECT_DIR$/typer/templates/group/index.html" />
       </list>
     </option>
   </component>
@@ -687,7 +697,14 @@
       <option name="project" value="LOCAL" />
       <updated>1526848899907</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Dodanie statystyk, zmiana w wyswietlaniu trwajacych meczy">
+      <created>1526849186307</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1526849186307</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -920,13 +937,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/typer/templates/group/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="855">
-          <caret line="57" column="6" lean-forward="false" selection-start-line="57" selection-start-column="6" selection-end-line="57" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/typer/templates/auth/login.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
@@ -1060,6 +1070,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="556">
           <caret line="79" column="46" lean-forward="false" selection-start-line="79" selection-start-column="46" selection-end-line="79" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/typer/templates/group/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="64" column="48" lean-forward="true" selection-start-line="64" selection-start-column="48" selection-end-line="64" selection-end-column="48" />
           <folding />
         </state>
       </provider>

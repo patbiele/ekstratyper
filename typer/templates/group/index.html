@@ -60,10 +60,10 @@
             <div class="divTableCell">
                 {% if game.is_game_soon %}
                     Wkrótce!
-                {% elif game.was_game_started %}
-                    W trakcie!
                 {% elif game.was_game_finished %}
                     <a href="{% url 'bets/game' group_id=group.id game_id=game.id %}">Wyniki</a>
+                {% elif game.was_game_started %}
+                    <a href="{% url 'bets/game' group_id=group.id game_id=game.id %}">W trakcie!</a>
                 {% endif %}
             </div>
         </div>
