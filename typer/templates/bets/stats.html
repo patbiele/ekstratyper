@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+{% load extra_tags %}
+
+{% block title %}Grupa: {{ group }}{% endblock %}
+
+{% block content %}
+{% load tz %}
+
+<div><a href="{% url 'group' group_id=group_id %}">Wróć do grupy</a></div>
+
+<h2 align="center">{{ group }} - {{ group.league.league_name }}:</h2>
+<hr>
+
+<h2 align="center">Pewniaki:</h2>
+<div class="divTable">
+    <div class="divTableBody">
+        <div class="divTableRow">
+            <div class="divTableCell">Gracz</div>
+            <div class="divTableCell">Punkty</div>
+            <div class="divTableCell">Ilość</div>
+            <div class="divTableCell">% trafień</div>
+            <div class="divTableCell">6</div>
+            <div class="divTableCell">4</div>
+            <div class="divTableCell">2</div>
+            <div class="divTableCell">-3</div>
+            <div class="divTableCell">Punktacja bez pewniaków</div>
+        </div>
+        {% for member in members %}
+        <div class="divTableRow">
+            <div class="divTableCell">{{ member.member.get_display_name }}</div>
+            <div class="divTableCell">{{ member.member.risk_count }}</div>
+            <div class="divTableCell">{{ member.member.risk_points }}</div>
+            <div class="divTableCell">{{ member.member.risk_percent }}</div>
+            <div class="divTableCell">{{ member.member.points_risk_6_count }}</div>
+            <div class="divTableCell">{{ member.member.points_risk_4_count }}</div>
+            <div class="divTableCell">{{ member.member.points_risk_2_count }}</div>
+            <div class="divTableCell">{{ member.member.points_risk_3_count }}</div>
+            <div class="divTableCell">{{ member.member.riskless_points }}</div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<h2 align="center">Trafienia:</h2>
+<div class="divTable">
+    <div class="divTableBody">
+        <div class="divTableRow">
+            <div class="divTableCell">Gracz</div>
+            <div class="divTableCell">Łącznie typów</div>
+            <div class="divTableCell">Bonusy</div>
+            <div class="divTableCell">Idealne trafienia</div>
+            <div class="divTableCell">Najlepsza kolejka</div>
+            <div class="divTableCell">Punkty</div>
+            <div class="divTableCell">Najgorsza kolejka</div>
+            <div class="divTableCell">Punkty</div>
+        </div>
+        {% for member in members %}
+        <div class="divTableRow">
+            <div class="divTableCell">{{ member.member.get_display_name }}</div>
+            <div class="divTableCell">{{ member.member.bet_count }}</div>
+            <div class="divTableCell">{{ member.member.bonus_count }}</div>
+            <div class="divTableCell">{{ member.member.perfect_count }}</div>
+            <div class="divTableCell">{{ member.member.round_max }}</div>
+            <div class="divTableCell">{{ member.member.round_max_points }}</div>
+            <div class="divTableCell">{{ member.member.round_min }}</div>
+            <div class="divTableCell">{{ member.member.round_min_points }}</div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<h2 align="center">Rozkład punktów:</h2>
+<div class="divTable">
+    <div class="divTableBody">
+        <div class="divTableRow">
+            <div class="divTableCell">Gracz</div>
+            <div class="divTableCell">3</div>
+            <div class="divTableCell">2</div>
+            <div class="divTableCell">1</div>
+            <div class="divTableCell">0</div>
+            <div class="divTableCell">6</div>
+            <div class="divTableCell">4</div>
+            <div class="divTableCell">2</div>
+            <div class="divTableCell">-3</div>
+        </div>
+        {% for member in members %}
+        <div class="divTableRow">
+            <div class="divTableCell">{{ member.member.get_display_name }}</div>
+            <div class="divTableCell">{{ member.member.points_3_count }}</div>
+            <div class="divTableCell">{{ member.member.points_2_count }}</div>
+            <div class="divTableCell">{{ member.member.points_1_count }}</div>
+            <div class="divTableCell">{{ member.member.points_0_count }}</div>
+            <div class="divTableCell">{{ member.member.points_risk_6_count }}</div>
+            <div class="divTableCell">{{ member.member.points_risk_4_count }}</div>
+            <div class="divTableCell">{{ member.member.points_risk_2_count }}</div>
+            <div class="divTableCell">{{ member.member.points_risk_3_count }}</div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<h2 align="center">Lechia:</h2>
+<div class="divTable">
+    <div class="divTableBody">
+        <div class="divTableRow">
+            <div class="divTableCell">Gracz</div>
+            <div class="divTableCell">Punkty z Lechii</div>
+            <div class="divTableCell">Za Lechią</div>
+            <div class="divTableCell">Przeciw</div>
+            <div class="divTableCell">Remis</div>
+            <div class="divTableCell">Pewniak Za</div>
+            <div class="divTableCell">Pewniak Przeciw</div>
+            <div class="divTableCell">Pewniak Remis</div>
+            <div class="divTableCell">Derby punkty</div>
+            <div class="divTableCell">Za Lechią</div>
+            <div class="divTableCell">Za Arką</div>
+            <div class="divTableCell">Remis</div>
+        </div>
+        {% for member in members %}
+        <div class="divTableRow">
+            <div class="divTableCell">{{ member.member.get_display_name }}</div>
+            <div class="divTableCell">{{ member.member.lechia_points }}</div>
+            <div class="divTableCell">{{ member.member.lechia_for_count }}</div>
+            <div class="divTableCell">{{ member.member.lechia_against_count }}</div>
+            <div class="divTableCell">{{ member.member.lechia_draw_count }}</div>
+            <div class="divTableCell">{{ member.member.lechia_risk_for_count }}</div>
+            <div class="divTableCell">{{ member.member.lechia_risk_against_count }}</div>
+            <div class="divTableCell">{{ member.member.lechia_risk_draw_count }}</div>
+            <div class="divTableCell">{{ member.member.lechia_arka_points }}</div>
+            <div class="divTableCell">{{ member.member.lechia_arka_for_count }}</div>
+            <div class="divTableCell">{{ member.member.lechia_arka_against_count }}</div>
+            <div class="divTableCell">{{ member.member.lechia_arka_draw_count }}</div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<h2 align="center">Lechia:</h2>
+<div class="divTable">
+    <div class="divTableBody">
+        <div class="divTableRow">
+            <div class="divTableCell">Gracz</div>
+            <div class="divTableCell">Typy na gospodarza</div>
+            <div class="divTableCell">Typy na gościa</div>
+            <div class="divTableCell">Remis</div>
+        </div>
+        {% for member in members %}
+        <div class="divTableRow">
+            <div class="divTableCell">{{ member.member.get_display_name }}</div>
+            <div class="divTableCell">{{ member.member.home_for_count }}</div>
+            <div class="divTableCell">{{ member.member.away_for_count }}</div>
+            <div class="divTableCell">{{ member.member.draw_count }}</div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div><a href="{% url 'group' group_id=group_id %}">Wróć do grupy</a></div>
+{% endblock %}

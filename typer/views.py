@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth import views as auth_views, update_session_auth_hash
 from django.contrib.auth.forms import SetPasswordForm
-from django.db.models import Value, Max
+from django.db.models import Value, Max, F
 from django.http import HttpResponse
 from .forms import *
 from .helper import * # contains following libs
@@ -317,6 +317,147 @@ def bets_single_member(request, group_id, member_id):
     bets = Bet.objects.select_related('game').filter(bettor_id=member_id, group_id=group_id).order_by('game__game_date')
 
     return render(request, 'bets/member.html', {'bets':bets, 'group_id':group_id})
+
+def bets_stats(request, group_id, member_id):
+    try:
+        MemberGroup.objects.get(group_id=group_id, member_id=request.user.id)
+    except MemberGroup.DoesNotExist:
+        return redirect('group', group_id)
+    members = MemberGroup.objects.filter(group_id=group_id).order_by('member__alias')
+    # 1 pewniaki
+    members.all().annotate(risk_count=Value(0))
+    members.all().annotate(risk_points=Value(0))
+    members.all().annotate(risk_percent=Value(0))
+    members.all().annotate(points_risk_6_count=Value(0))
+    members.all().annotate(points_risk_4_count=Value(0))
+    members.all().annotate(points_risk_2_count=Value(0))
+    members.all().annotate(points_risk_3_count=Value(0))
+    # 2 bonusy ilosc
+    members.all().annotate(bonus_count=Value(0))
+    # 3 typowane spotkania
+    members.all().annotate(bet_count=Value(0))
+    # 4 kolejki min/max
+    members.all().annotate(round_max=Value(0))
+    members.all().annotate(round_min=Value(0))
+    members.all().annotate(round_max_points=Value(0))
+    members.all().annotate(round_min_points=Value(0))
+    # 5 idealne spotkania
+    members.all().annotate(perfect_count=Value(0))
+    # 6 rozklad punktow
+    members.all().annotate(points_3_count=Value(0))
+    members.all().annotate(points_2_count=Value(0))
+    members.all().annotate(points_1_count=Value(0))
+    members.all().annotate(points_0_count=Value(0))
+    # 7 bez pewniakow
+    members.all().annotate(riskless_points=Value(0))
+    # 8 lechia
+    members.all().annotate(lechia_points=Value(0))
+    members.all().annotate(lechia_for_count=Value(0))
+    members.all().annotate(lechia_against_count=Value(0))
+    members.all().annotate(lechia_draw_count=Value(0))
+    members.all().annotate(lechia_risk_against_count=Value(0))
+    members.all().annotate(lechia_risk_for_count=Value(0))
+    members.all().annotate(lechia_risk_draw_count=Value(0))
+    # 8.1 lechia vs arka
+    members.all().annotate(lechia_arka_points=Value(0))
+    members.all().annotate(lechia_arka_for_count=Value(0))
+    members.all().annotate(lechia_arka_against_count=Value(0))
+    members.all().annotate(lechia_arka_draw_count=Value(0))
+    # 9 typy na gospodarzy, gosci i remisy
+    members.all().annotate(home_for_count=Value(0))
+    members.all().annotate(away_for_count=Value(0))
+    members.all().annotate(draw_count=Value(0))
+
+    for member in members:
+        member.risk_points = Bet.objects.values_list('points', flat=True).filter(bettor=member.member, is_risk=True,
+                                                                   group_id=group_id).aggregate(Sum('points'))['points__sum']
+        member.risk_count = Bet.objects.filter(bettor=member.member, is_risk=True, group_id=group_id).count()
+        member.risk_percent = Bet.objects.filter(bettor=member.member, is_risk=True, group_id=group_id,
+                                                 points__gte=0).count()/member.risk_count
+
+        member.bonus_count = Bet.objects.filter(bettor=member.member, group_id=group_id, is_bonus=True).count()
+
+        member.bet_count = Bet.objects.filter(bettor=member.member, group_id=group_id).count()
+
+        member.perfect_count = Bet.objects.filter(bettor=member.member, group_id=group_id, points__in=[3, 6]).count()
+
+        for r in range(1,count_rounds(group_id)):
+            round_points = Bet.objects.values_list('points', flat=True).filter(bettor=member.member, game__round=r,
+                                                group_id=group_id).aggregate(Sum('points'))['points__sum']
+            if member.round_max_points < round_points:
+                member.round_max_points = round_points
+                member.round_max = r
+            elif member.round_min_points > round_points:
+                member.round_min_points = round_points
+                member.round_min = r
+
+        member.points_3_count = Bet.objects.filter(bettor=member.member, group_id=group_id, points=3).count()
+        member.points_2_count = Bet.objects.filter(bettor=member.member, group_id=group_id, points=2, is_risk=False).count()
+        member.points_1_count = Bet.objects.filter(bettor=member.member, group_id=group_id, points=1).count()
+        member.points_0_count = Bet.objects.filter(bettor=member.member, group_id=group_id, points=0).count()
+        member.points_risk_6_count = Bet.objects.filter(bettor=member.member, group_id=group_id, points=6).count()
+        member.points_risk_4_count = Bet.objects.filter(bettor=member.member, group_id=group_id, points=4).count()
+        member.points_risk_2_count = Bet.objects.filter(bettor=member.member, group_id=group_id, points=2, is_risk=True).count()
+        member.points_risk_3_count = Bet.objects.filter(bettor=member.member, group_id=group_id, points=-3).count()
+
+        member.riskless_points = Bet.objects.values_list('points', flat=True).filter(bettor=member.member, is_risk=True,
+                                             group_id=group_id, points__gt=0).aggregate(Sum('points'))['points__sum']/2
+        member.riskless_points += Bet.objects.values_list('points', flat=True).filter(bettor=member.member, is_risk=False,
+                                             group_id=group_id, points__gt=0).aggregate(Sum('points'))['points__sum']
+
+        member.lechia_points = Bet.objects.values_list('points', flat=True).filter(bettor=member.member,
+                                         group_id=group_id, game__home_team=4).aggregate(Sum('points'))['points__sum']
+        member.lechia_points += Bet.objects.values_list('points', flat=True).filter(bettor=member.member,
+                                         group_id=group_id, game__away_team=4).aggregate(Sum('points'))['points__sum']
+        member.lechia_for_count = Bet.objects.filter(bettor=member.member, group_id=group_id,
+                                                     game__home_team=4, home_bet__gt=F('away_bet')).count()
+        member.lechia_for_count += Bet.objects.filter(bettor=member.member, group_id=group_id,
+                                                      game__away_team=4, home_bet__lt=F('away_bet')).count()
+        member.lechia_against_count = Bet.objects.filter(bettor=member.member, group_id=group_id,
+                                                         game__home_team=4, home_bet__lt=F('away_bet')).count()
+        member.lechia_against_count += Bet.objects.filter(bettor=member.member, group_id=group_id,
+                                                          game__away_team=4, home_bet__gt=F('away_bet')).count()
+        member.lechia_draw_count = Bet.objects.filter(bettor=member.member, group_id=group_id,
+                                                      game__home_team=4, home_bet=F('away_bet')).count()
+        member.lechia_draw_count += Bet.objects.filter(bettor=member.member, group_id=group_id,
+                                                       game__away_team=4, home_bet=F('away_bet')).count()
+        member.lechia_risk_for_count = Bet.objects.filter(bettor=member.member, group_id=group_id, is_risk=True,
+                                                     game__home_team=4, home_bet__gt=F('away_bet')).count()
+        member.lechia_risk_for_count += Bet.objects.filter(bettor=member.member, group_id=group_id, is_risk=True,
+                                                      game__away_team=4, home_bet__lt=F('away_bet')).count()
+        member.lechia_risk_against_count = Bet.objects.filter(bettor=member.member, group_id=group_id, is_risk=True,
+                                                         game__home_team=4, home_bet__lt=F('away_bet')).count()
+        member.lechia_risk_against_count += Bet.objects.filter(bettor=member.member, group_id=group_id, is_risk=True,
+                                                          game__away_team=4, home_bet__gt=F('away_bet')).count()
+        member.lechia_risk_draw_count = Bet.objects.filter(bettor=member.member, group_id=group_id, is_risk=True,
+                                                      game__home_team=4, home_bet=F('away_bet')).count()
+        member.lechia_risk_draw_count += Bet.objects.filter(bettor=member.member, group_id=group_id, is_risk=True,
+                                                       game__away_team=4, home_bet=F('away_bet')).count()
+
+        member.lechia_arka_points = Bet.objects.values_list('points', flat=True).filter(bettor=member.member,
+                                                            group_id=group_id,game__home_team__in=[4,13],
+                                                            game__away_team__in=[4,13]).aggregate(Sum('points'))['points__sum']
+        member.lechia_arka_for_count = Bet.objects.filter(bettor=member.member, group_id=group_id,
+                                                     game__home_team=4, game__away_team=13, home_bet__gt=F('away_bet')).count()
+        member.lechia_arka_for_count += Bet.objects.filter(bettor=member.member, group_id=group_id,
+                                                      game__away_team=4, game__home_team=13, home_bet__lt=F('away_bet')).count()
+        member.lechia_arka_against_count = Bet.objects.filter(bettor=member.member, group_id=group_id,
+                                                          game__home_team=4, game__away_team=13, home_bet__lt=F('away_bet')).count()
+        member.lechia_arka_against_count += Bet.objects.filter(bettor=member.member, group_id=group_id,
+                                                           game__away_team=4, game__home_team=13, home_bet__gt=F('away_bet')).count()
+        member.lechia_arka_draw_count = Bet.objects.filter(bettor=member.member, group_id=group_id,
+                                                           game__home_team=4, game__away_team=13, home_bet=F('away_bet')).count()
+        member.lechia_arka_draw_count += Bet.objects.filter(bettor=member.member, group_id=group_id,
+                                                            game__away_team=4, game__home_team=13, home_bet=F('away_bet')).count()
+
+        member.home_for_count = Bet.objects.filter(bettor=member.member, group_id=group_id,
+                                                     home_bet__gt=F('away_bet')).count()
+        member.away_for_count = Bet.objects.filter(bettor=member.member, group_id=group_id,
+                                                         home_bet__lt=F('away_bet')).count()
+        member.draw_count = Bet.objects.filter(bettor=member.member, group_id=group_id,
+                                                      home_bet=F('away_bet')).count()
+
+    return render(request, 'bets/stats.html', {'members':members, 'group_id':group_id})
 
 def bets_all(request, group_id):
     try:

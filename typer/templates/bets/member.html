@@ -16,7 +16,7 @@
             <div class="divTableHead">Bonus</div>
         </div>
             {% for bet in bets %}
-            {% if bet.game.was_game_finished %}
+            {% if bet.game.was_game_started %}
             <div class="divTableRow">
                 <div class="divTableCell">
                     {{ bet.game.round }}
