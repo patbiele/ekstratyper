@@ -318,7 +318,7 @@ def bets_single_member(request, group_id, member_id):
 
     return render(request, 'bets/member.html', {'bets':bets, 'group_id':group_id})
 
-def bets_stats(request, group_id, member_id):
+def bets_stats(request, group_id):
     try:
         MemberGroup.objects.get(group_id=group_id, member_id=request.user.id)
     except MemberGroup.DoesNotExist:
