@@ -8,9 +8,6 @@
 
 <div><a href="{% url 'group' group_id=group_id %}">Wróć do grupy</a></div>
 
-<h2 align="center">{{ group }} - {{ group.league.league_name }}:</h2>
-<hr>
-
 <h2 align="center">Pewniaki:</h2>
 <div class="divTable">
     <div class="divTableBody">
@@ -28,14 +25,14 @@
         {% for member in members %}
         <div class="divTableRow">
             <div class="divTableCell">{{ member.member.get_display_name }}</div>
-            <div class="divTableCell">{{ member.member.risk_count }}</div>
-            <div class="divTableCell">{{ member.member.risk_points }}</div>
-            <div class="divTableCell">{{ member.member.risk_percent }}</div>
-            <div class="divTableCell">{{ member.member.points_risk_6_count }}</div>
-            <div class="divTableCell">{{ member.member.points_risk_4_count }}</div>
-            <div class="divTableCell">{{ member.member.points_risk_2_count }}</div>
-            <div class="divTableCell">{{ member.member.points_risk_3_count }}</div>
-            <div class="divTableCell">{{ member.member.riskless_points }}</div>
+            <div class="divTableCell">{{ member.risk_count }}</div>
+            <div class="divTableCell">{{ member.risk_points }}</div>
+            <div class="divTableCell">{{ member.risk_percent }}</div>
+            <div class="divTableCell">{{ member.points_risk_6_count }}</div>
+            <div class="divTableCell">{{ member.points_risk_4_count }}</div>
+            <div class="divTableCell">{{ member.points_risk_2_count }}</div>
+            <div class="divTableCell">{{ member.points_risk_3_count }}</div>
+            <div class="divTableCell">{{ member.riskless_points }}</div>
         </div>
         {% endfor %}
     </div>
@@ -57,13 +54,13 @@
         {% for member in members %}
         <div class="divTableRow">
             <div class="divTableCell">{{ member.member.get_display_name }}</div>
-            <div class="divTableCell">{{ member.member.bet_count }}</div>
-            <div class="divTableCell">{{ member.member.bonus_count }}</div>
-            <div class="divTableCell">{{ member.member.perfect_count }}</div>
-            <div class="divTableCell">{{ member.member.round_max }}</div>
-            <div class="divTableCell">{{ member.member.round_max_points }}</div>
-            <div class="divTableCell">{{ member.member.round_min }}</div>
-            <div class="divTableCell">{{ member.member.round_min_points }}</div>
+            <div class="divTableCell">{{ member.bet_count }}</div>
+            <div class="divTableCell">{{ member.bonus_count }}</div>
+            <div class="divTableCell">{{ member.perfect_count }}</div>
+            <div class="divTableCell">{{ member.round_max }}</div>
+            <div class="divTableCell">{{ member.round_max_points }}</div>
+            <div class="divTableCell">{{ member.round_min }}</div>
+            <div class="divTableCell">{{ member.round_min_points }}</div>
         </div>
         {% endfor %}
     </div>
@@ -86,14 +83,14 @@
         {% for member in members %}
         <div class="divTableRow">
             <div class="divTableCell">{{ member.member.get_display_name }}</div>
-            <div class="divTableCell">{{ member.member.points_3_count }}</div>
-            <div class="divTableCell">{{ member.member.points_2_count }}</div>
-            <div class="divTableCell">{{ member.member.points_1_count }}</div>
-            <div class="divTableCell">{{ member.member.points_0_count }}</div>
-            <div class="divTableCell">{{ member.member.points_risk_6_count }}</div>
-            <div class="divTableCell">{{ member.member.points_risk_4_count }}</div>
-            <div class="divTableCell">{{ member.member.points_risk_2_count }}</div>
-            <div class="divTableCell">{{ member.member.points_risk_3_count }}</div>
+            <div class="divTableCell">{{ member.points_3_count }}</div>
+            <div class="divTableCell">{{ member.points_2_count }}</div>
+            <div class="divTableCell">{{ member.points_1_count }}</div>
+            <div class="divTableCell">{{ member.points_0_count }}</div>
+            <div class="divTableCell">{{ member.points_risk_6_count }}</div>
+            <div class="divTableCell">{{ member.points_risk_4_count }}</div>
+            <div class="divTableCell">{{ member.points_risk_2_count }}</div>
+            <div class="divTableCell">{{ member.points_risk_3_count }}</div>
         </div>
         {% endfor %}
     </div>
@@ -119,23 +116,23 @@
         {% for member in members %}
         <div class="divTableRow">
             <div class="divTableCell">{{ member.member.get_display_name }}</div>
-            <div class="divTableCell">{{ member.member.lechia_points }}</div>
-            <div class="divTableCell">{{ member.member.lechia_for_count }}</div>
-            <div class="divTableCell">{{ member.member.lechia_against_count }}</div>
-            <div class="divTableCell">{{ member.member.lechia_draw_count }}</div>
-            <div class="divTableCell">{{ member.member.lechia_risk_for_count }}</div>
-            <div class="divTableCell">{{ member.member.lechia_risk_against_count }}</div>
-            <div class="divTableCell">{{ member.member.lechia_risk_draw_count }}</div>
-            <div class="divTableCell">{{ member.member.lechia_arka_points }}</div>
-            <div class="divTableCell">{{ member.member.lechia_arka_for_count }}</div>
-            <div class="divTableCell">{{ member.member.lechia_arka_against_count }}</div>
-            <div class="divTableCell">{{ member.member.lechia_arka_draw_count }}</div>
+            <div class="divTableCell">{{ member.lechia_points }}</div>
+            <div class="divTableCell">{{ member.lechia_for_count }}</div>
+            <div class="divTableCell">{{ member.lechia_against_count }}</div>
+            <div class="divTableCell">{{ member.lechia_draw_count }}</div>
+            <div class="divTableCell">{{ member.lechia_risk_for_count }}</div>
+            <div class="divTableCell">{{ member.lechia_risk_against_count }}</div>
+            <div class="divTableCell">{{ member.lechia_risk_draw_count }}</div>
+            <div class="divTableCell">{{ member.lechia_arka_points }}</div>
+            <div class="divTableCell">{{ member.lechia_arka_for_count }}</div>
+            <div class="divTableCell">{{ member.lechia_arka_against_count }}</div>
+            <div class="divTableCell">{{ member.lechia_arka_draw_count }}</div>
         </div>
         {% endfor %}
     </div>
 </div>
 
-<h2 align="center">Lechia:</h2>
+<h2 align="center">Gospodarze/Goście:</h2>
 <div class="divTable">
     <div class="divTableBody">
         <div class="divTableRow">
@@ -147,9 +144,9 @@
         {% for member in members %}
         <div class="divTableRow">
             <div class="divTableCell">{{ member.member.get_display_name }}</div>
-            <div class="divTableCell">{{ member.member.home_for_count }}</div>
-            <div class="divTableCell">{{ member.member.away_for_count }}</div>
-            <div class="divTableCell">{{ member.member.draw_count }}</div>
+            <div class="divTableCell">{{ member.home_for_count }}</div>
+            <div class="divTableCell">{{ member.away_for_count }}</div>
+            <div class="divTableCell">{{ member.draw_count }}</div>
         </div>
         {% endfor %}
     </div>
