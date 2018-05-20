@@ -77,8 +77,8 @@ class Game(models.Model):
         return self.game_date <= timezone.now() - datetime.timedelta(hours=2)
 
     def was_game_started(self):
-        #return True if game start time passed but is not finished(self.was_game_finished) yet
-        return self.game_date <= timezone.now() and not self.was_game_finished()
+        #return True if game start time passed
+        return self.game_date <= timezone.now()
 
     def __str__(self):
         ans = str(self.home_team)+' '
