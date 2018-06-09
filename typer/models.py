@@ -100,7 +100,7 @@ class Bet(models.Model):
 
     def __str__(self):
         # ans = str(self.bettor)+' '
-        ans = str(self.home_bet)+':'+str(self.away_bet) if self.home_bet and self.away_bet else '-:-'
+        ans = str(self.home_bet)+':'+str(self.away_bet) if self.home_bet!=None and self.away_bet!=None else '-:-'
         # ans += ' pkt:'+str(self.points) if self.points else ' pkt brak'
         if self.is_risk: ans += ' [P]'
         return ans
