@@ -12,7 +12,7 @@
             <div class="divTableCell">#</div>
             <div class="divTableCell">Gracz</div>
             <div class="divTableCell">Suma punktów</div>
-            <div class="divTableCell">Punkty z {{ current_round|add:-1 }}. kolejki</div>
+            <!--<div class="divTableCell">Punkty z {{ current_round|add:-1 }}. kolejki</div>-->
             <div class="divTableCell">Typy</div>
         </div>
         {% for member in members %}
@@ -20,7 +20,7 @@
             <div class="divTableCell">{{ forloop.counter }}.</div>
             <div class="divTableCell">{{ member.member.get_display_name }}</div>
             <div class="divTableCell">{{ member.points }}</div>
-            <div class="divTableCell">{{ member.previous_round }}</div>
+        <!--    <div class="divTableCell">{{ member.previous_round }}</div> -->
             <div class="divTableCell">
                 <a href="{% url 'bets/member' group_id=group.id member_id=member.member.id %}">Zobacz</a>
             </div>
@@ -45,6 +45,9 @@
                 Kolejka {{ round }}.
             </div>
             <div class="divTableHeadRound">
+                Typ
+            </div>
+            <div class="divTableHeadRound">
                 <a href="{% url 'bets/round' group_id=group.id round=round %}">Wyniki</a>
             </div>
         </div>
@@ -56,6 +59,9 @@
             </div>
             <div class="divTableCell">
                 {{ game }}
+            </div>
+            <div class="divTableCell">
+                {{ game.my_bet }}
             </div>
             <div class="divTableCell">
                 {% if game.is_game_soon %}

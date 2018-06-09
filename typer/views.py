@@ -40,6 +40,15 @@ def group(request, group_id):
     # get only games starting from previous round
     games = [Game.objects.filter(round=r, league_id=group.league.id, round__gte=(current_round-1)).order_by('game_date') for r in max_rounds]
     members = MemberGroup.objects.filter(group_id=group_id).order_by('-points')
+    for round in games:
+        for game in round:
+            try:
+                my_bet = Bet.objects.get(bettor=request.user, game=game, group_id=group_id)
+            except Bet.DoesNotExist:
+                my_bet = "-:-"
+            game.my_bet=my_bet
+
+
     members.all().annotate(previous_round=Value(0))
 
     for member in members:

@@ -99,10 +99,10 @@ class Bet(models.Model):
     points = models.SmallIntegerField(null=True,blank=True,default=None)
 
     def __str__(self):
-        ans = str(self.bettor)+' '
-        ans += str(self.home_bet)+':'+str(self.away_bet) if self.home_bet and self.away_bet else '-:-'
-        ans += ' pkt:'+str(self.points) if self.points else ' pkt brak'
-        if self.is_risk: ans += ' no i pewniak!'
+        # ans = str(self.bettor)+' '
+        ans = str(self.home_bet)+':'+str(self.away_bet) if self.home_bet and self.away_bet else '-:-'
+        # ans += ' pkt:'+str(self.points) if self.points else ' pkt brak'
+        if self.is_risk: ans += ' [P]'
         return ans
 
 class Votes(models.Model):
