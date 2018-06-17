@@ -99,6 +99,7 @@ def sum_up_points(group_id):
     members = MemberGroup.objects.filter(group_id=group_id)
     for member in members:
         pts = Bet.objects.filter(group_id=group_id, bettor_id=member.member.id).exclude(points=0).aggregate(Sum('points'))['points__sum']
+        if pts is None: pts = 0
         pts += Bet.objects.filter(group_id=group_id, bettor_id=member.member.id, is_bonus=True).count()
         member.points = pts
         member.save()
