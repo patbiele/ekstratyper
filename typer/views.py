@@ -29,8 +29,8 @@ def group(request, group_id):
         return redirect('dashboard')
 
     # get closest game to current datetime
-    current_round = Game.objects.values_list('round', flat=True).filter(league_id=group.league.id,
-                                                                     game_date__gt=datetime.datetime.now()).order_by('game_date')
+    current_round = Game.objects.values_list('round', flat=True).filter(league_id=group.league.id)#,
+                                                                     #game_date__gt=datetime.datetime.now()).order_by('game_date')
     if (current_round):
         current_round = current_round[0]
     else:
