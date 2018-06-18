@@ -36,9 +36,11 @@ def group(request, group_id):
     else:
         current_round = Game.objects.filter(league_id=group.league.id).aggregate(Max('round'))['round__max']
 
-    max_rounds = group.league.game_set.values_list('round', flat=True).distinct().filter(round__gte=(current_round-1)).order_by('round')
+    current_round_minus_const = current_round - 8
+
+    max_rounds = group.league.game_set.values_list('round', flat=True).distinct().filter(round__gte=(current_round_minus_const)).order_by('round')
     # get only games starting from previous round
-    games = [Game.objects.filter(round=r, league_id=group.league.id, round__gte=(current_round-1)).order_by('game_date') for r in max_rounds]
+    games = [Game.objects.filter(round=r, league_id=group.league.id, round__gte=(current_round_minus_const)).order_by('game_date') for r in max_rounds]
     members = MemberGroup.objects.filter(group_id=group_id).order_by('-points')
     for round in games:
         for game in round:
@@ -52,9 +54,9 @@ def group(request, group_id):
     members.all().annotate(previous_round=Value(0))
 
     for member in members:
-        previous_round_pts = Bet.objects.values_list('points', flat=True).filter(bettor=member.member, game__round=current_round-1, group_id=group_id).aggregate(Sum('points'))['points__sum']
+        previous_round_pts = Bet.objects.values_list('points', flat=True).filter(bettor=member.member, game__round=current_round_minus_const, group_id=group_id).aggregate(Sum('points'))['points__sum']
         if previous_round_pts is None: previous_round_pts = 0
-        previous_round_pts += Bet.objects.filter(bettor=member.member, game__round=current_round-1, group_id=group_id, is_bonus=True).count()
+        previous_round_pts += Bet.objects.filter(bettor=member.member, game__round=current_round_minus_const, group_id=group_id, is_bonus=True).count()
         member.previous_round=previous_round_pts if previous_round_pts else 0
 
     for round in games:
@@ -65,9 +67,11 @@ def group(request, group_id):
                     score_points(bets[0].game)
                     score_bonus_game(group_id, game.id)
                     sum_up_points(group_id)
+                else:
+                    score_bonus_game(group_id, game.id)
 
     context = {'group':group, 'members':members, 'games':games, 'max_rounds':max_rounds, 'current_round':current_round}
-    if current_round > 2: context.update({'previous_rounds':range(1,current_round-1)})
+    if current_round > 2: context.update({'previous_rounds':range(1,current_round_minus_const)})
     if group.is_vote:
         current_vote_round = lowest_round_open_for_vote(group)
         context.update({'current_vote_round':current_vote_round})

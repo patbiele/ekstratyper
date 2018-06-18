@@ -101,7 +101,7 @@ def sum_up_points(group_id):
         pts = Bet.objects.filter(group_id=group_id, bettor_id=member.member.id).exclude(points=0).aggregate(Sum('points'))['points__sum']
         if pts is None: pts = 0
         pts += Bet.objects.filter(group_id=group_id, bettor_id=member.member.id, is_bonus=True).count()
-        if pts < 0: pts = 0
+        if pts < 0: pts = 0 # temp
         member.points = pts
         member.save()
 
@@ -109,8 +109,9 @@ def score_bonus_game(group_id, game_id):
     bets = Bet.objects.filter(group_id=group_id, game_id=game_id, points__gt = 0)
     if bets.count()==1:
         bet = bets.first()
-        bet.is_bonus = True
-        bet.save()
+        if bet.is_bonus != True:
+            bet.is_bonus = True
+            bet.save()
 
 def score_bonus_round(group_id, round):
     bettors_id = MemberGroup.objects.filter(group_id=group_id).values_list('bettor_id', flat=True)
