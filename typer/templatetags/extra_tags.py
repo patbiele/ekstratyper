@@ -12,7 +12,7 @@ def chr_(value):
 @register.filter(name='group_playoff')
 def group_playoff_(value):
     if value < 9:
-        return 'Grupa'+chr_(value)
+        return 'Grupa '+chr_(value)
     elif value == 9:
         return 'Runda 1/8'
     elif value == 10:
