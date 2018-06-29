@@ -66,9 +66,9 @@ def group(request, group_id):
                 if bets.filter(points=None):
                     score_points(bets[0].game)
                     score_bonus_game(group_id, game.id)
-                    sum_up_points(group_id)
                 else:
                     score_bonus_game(group_id, game.id)
+                sum_up_points(group_id)
 
     context = {'group':group, 'members':members, 'games':games, 'max_rounds':max_rounds, 'current_round':current_round}
     if current_round > 2: context.update({'previous_rounds':range(1,current_round_minus_const)})
