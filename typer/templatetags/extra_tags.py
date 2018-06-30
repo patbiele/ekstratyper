@@ -9,17 +9,21 @@ def index(List, i):
 def chr_(value):
     return chr(value + 64)
 
+@register.filter(name='isNotDefault')
+def isDefault_(label_tag):
+    return True if label_tag != "Gospodarz" else False
+
 @register.filter(name='group_playoff')
-def group_playoff_(value):
-    if value < 9:
-        return 'Grupa '+chr_(value)
-    elif value == 9:
+def group_playoff_(round):
+    if round < 9:
+        return 'Grupa '+chr_(round)
+    elif round == 9:
         return 'Runda 1/8'
-    elif value == 10:
+    elif round == 10:
         return 'Ćwierćfinały'
-    elif value == 11:
+    elif round == 11:
         return 'Półfinały'
-    elif value == 12:
+    elif round == 12:
         return 'Finał i 3. miejsce'
     else:
-        return value
+        return round+". kolejka"

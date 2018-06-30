@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load extra_tags %}
 
 {% block title %}Obstawianie - Kolejka {{ round }}{% endblock %}
 
@@ -15,7 +16,7 @@
     <div class="betTable">
         <div class="betBody">
             {% for form in formset %}
-            {% if form.home_bet.label_tag != 'Gospodarz'%}
+            {% if form.home_bet.label_tag|isNotDefault %}
             <div class="betRow">
                 <div class="betCellTeam" align="right">
                     {{ form.home_bet.label_tag }}

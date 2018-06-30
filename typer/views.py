@@ -111,7 +111,7 @@ def bet(request, round, group_id):
 
     games = get_games_for_bet(group,round)
 
-    betFormSet = forms.formset_factory(BetForm, extra=group.bets_per_round)
+    betFormSet = forms.formset_factory(BetForm, extra=games.count())
     context = {}
     risk_data = [('', '')]
     unchangeable_risk = False
