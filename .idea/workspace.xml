@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="f48c2942-4407-4718-b9de-9e34a1795a95" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/typer/templates/bet/index.html" afterPath="$PROJECT_DIR$/typer/templates/bet/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/typer/views.py" afterPath="$PROJECT_DIR$/typer/views.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -21,8 +22,8 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/typer/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="541">
-              <caret line="70" column="39" lean-forward="false" selection-start-line="70" selection-start-column="39" selection-end-line="70" selection-end-column="39" />
+            <state relative-caret-position="540">
+              <caret line="84" column="16" lean-forward="false" selection-start-line="84" selection-start-column="16" selection-end-line="84" selection-end-column="16" />
               <folding>
                 <element signature="e#24#63#0" expanded="true" />
               </folding>
@@ -43,8 +44,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/typer/templates/bet/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="675">
-              <caret line="45" column="0" lean-forward="false" selection-start-line="44" selection-start-column="9" selection-end-line="45" selection-end-column="0" />
+            <state relative-caret-position="480">
+              <caret line="32" column="24" lean-forward="false" selection-start-line="32" selection-start-column="24" selection-end-line="32" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -103,7 +104,7 @@
       <file leaf-file-name="helper.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/typer/helper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="566">
+            <state relative-caret-position="791">
               <caret line="112" column="31" lean-forward="true" selection-start-line="112" selection-start-column="31" selection-end-line="112" selection-end-column="31" />
               <folding />
             </state>
@@ -181,7 +182,6 @@
         <option value="$PROJECT_DIR$/typer/templates/signup/index.html" />
         <option value="$PROJECT_DIR$/typer/forms.py" />
         <option value="$PROJECT_DIR$/typer/templates/base.html" />
-        <option value="$PROJECT_DIR$/typer/templates/bet/index.html" />
         <option value="$PROJECT_DIR$/typer/templates/bets/index.html" />
         <option value="$PROJECT_DIR$/typer/static/typer/css/base.css" />
         <option value="$PROJECT_DIR$/typer/templates/index.html" />
@@ -202,6 +202,7 @@
         <option value="$PROJECT_DIR$/typer/helper.py" />
         <option value="$PROJECT_DIR$/typer/templates/group/index.html" />
         <option value="$PROJECT_DIR$/typer/templatetags/extra_tags.py" />
+        <option value="$PROJECT_DIR$/typer/templates/bet/index.html" />
         <option value="$PROJECT_DIR$/typer/views.py" />
       </list>
     </option>
@@ -252,6 +253,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -444,8 +447,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -814,7 +815,14 @@
       <option name="project" value="LOCAL" />
       <updated>1530217484137</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="sumuj punkty 2.0">
+      <created>1530303422374</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1530303422374</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -872,7 +880,8 @@
     <MESSAGE value="fix kolejek i bonusu rundy" />
     <MESSAGE value="grupy zamiast kolejek" />
     <MESSAGE value="grupy zamiast kolejek wersja z playoff" />
-    <option name="LAST_COMMIT_MESSAGE" value="grupy zamiast kolejek wersja z playoff" />
+    <MESSAGE value="sumuj punkty 2.0" />
+    <option name="LAST_COMMIT_MESSAGE" value="sumuj punkty 2.0" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1131,14 +1140,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/typer/templates/bet/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="675">
-          <caret line="45" column="0" lean-forward="false" selection-start-line="44" selection-start-column="9" selection-end-line="45" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ekstratyper/local_settings.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1189,16 +1190,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/typer/helper.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="566">
+        <state relative-caret-position="791">
           <caret line="112" column="31" lean-forward="true" selection-start-line="112" selection-start-column="31" selection-end-line="112" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/typer/templates/bet/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="32" column="24" lean-forward="false" selection-start-line="32" selection-start-column="24" selection-end-line="32" selection-end-column="24" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/typer/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="541">
-          <caret line="70" column="39" lean-forward="false" selection-start-line="70" selection-start-column="39" selection-end-line="70" selection-end-column="39" />
+        <state relative-caret-position="540">
+          <caret line="84" column="16" lean-forward="false" selection-start-line="84" selection-start-column="16" selection-end-line="84" selection-end-column="16" />
           <folding>
             <element signature="e#24#63#0" expanded="true" />
           </folding>

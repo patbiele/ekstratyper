@@ -21,6 +21,23 @@ def league(request, league_id):
     games = league.game_set.order_by("game_date", "round")
     return render(request, 'league/index.html', {'league':league, 'games':games})
 
+def sumpts(request, group_id):
+    group = get_object_or_404(Group, pk=group_id)
+
+    max_rounds = group.league.game_set.values_list('round', flat=True).distinct().order_by('round')
+
+    games = [Game.objects.filter(round=r, league_id=group.league.id).order_by('game_date') for r in max_rounds]
+    for round in games:
+        if round.exclude(score_home=None):
+            for game in round:
+                bets = Bet.objects.filter(game=game, group_id=group_id)
+                if bets.filter(points=None):
+                    score_points(bets[0].game)
+                score_bonus_game(group_id, game.id)
+    sum_up_points(group_id)
+
+    return render(request, 'group/index.html')
+
 def group(request, group_id):
     group = get_object_or_404(Group, pk=group_id)
     try:
@@ -36,9 +53,9 @@ def group(request, group_id):
     else:
         current_round = Game.objects.filter(league_id=group.league.id).aggregate(Max('round'))['round__max']
 
-    current_round_minus_const = current_round - 8
+    current_round_minus_const = current_round - 12
 
-    max_rounds = group.league.game_set.values_list('round', flat=True).distinct().filter(round__gte=(current_round_minus_const)).order_by('round')
+    max_rounds = group.league.game_set.values_list('round', flat=True).distinct().filter(round__gte=(current_round_minus_const)).order_by('-round')
     # get only games starting from previous round
     games = [Game.objects.filter(round=r, league_id=group.league.id, round__gte=(current_round_minus_const)).order_by('game_date') for r in max_rounds]
     members = MemberGroup.objects.filter(group_id=group_id).order_by('-points')
@@ -53,11 +70,11 @@ def group(request, group_id):
 
     members.all().annotate(previous_round=Value(0))
 
-    for member in members:
-        previous_round_pts = Bet.objects.values_list('points', flat=True).filter(bettor=member.member, game__round=current_round_minus_const, group_id=group_id).aggregate(Sum('points'))['points__sum']
-        if previous_round_pts is None: previous_round_pts = 0
-        previous_round_pts += Bet.objects.filter(bettor=member.member, game__round=current_round_minus_const, group_id=group_id, is_bonus=True).count()
-        member.previous_round=previous_round_pts if previous_round_pts else 0
+    # for member in members:
+    #     previous_round_pts = Bet.objects.values_list('points', flat=True).filter(bettor=member.member, game__round=current_round_minus_const, group_id=group_id).aggregate(Sum('points'))['points__sum']
+    #     if previous_round_pts is None: previous_round_pts = 0
+    #     previous_round_pts += Bet.objects.filter(bettor=member.member, game__round=current_round_minus_const, group_id=group_id, is_bonus=True).count()
+    #     member.previous_round=previous_round_pts if previous_round_pts else 0
 
     for round in games:
         if round.exclude(score_home=None):
@@ -65,10 +82,8 @@ def group(request, group_id):
                 bets = Bet.objects.filter(game=game, group_id=group_id)
                 if bets.filter(points=None):
                     score_points(bets[0].game)
-                    score_bonus_game(group_id, game.id)
-                else:
-                    score_bonus_game(group_id, game.id)
-                sum_up_points(group_id)
+                score_bonus_game(group_id, game.id)
+    sum_up_points(group_id)
 
     context = {'group':group, 'members':members, 'games':games, 'max_rounds':max_rounds, 'current_round':current_round}
     if current_round > 2: context.update({'previous_rounds':range(1,current_round_minus_const)})

@@ -15,6 +15,7 @@
     <div class="betTable">
         <div class="betBody">
             {% for form in formset %}
+            {% if form.home_bet.label_tag != 'Gospodarz'%}
             <div class="betRow">
                 <div class="betCellTeam" align="right">
                     {{ form.home_bet.label_tag }}
@@ -29,6 +30,7 @@
                     {{ form.away_bet.label_tag }}
                 </div>
             </div>
+            {% enndif %}
             {% endfor %}
         </div>
     </div>
