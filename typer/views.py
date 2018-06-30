@@ -36,7 +36,7 @@ def sumpts(request, group_id):
                 score_bonus_game(group_id, game.id)
     sum_up_points(group_id)
 
-    return render(request, 'group/index.html')
+    return redirect('group', group_id)
 
 def group(request, group_id):
     group = get_object_or_404(Group, pk=group_id)
