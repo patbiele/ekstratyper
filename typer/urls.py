@@ -9,6 +9,7 @@ urlpatterns = [
     url(r'^$', views.dashboard, name='dashboard'),
     url(r'^league/(?P<league_id>[0-9]+)/$', views.league, name='league'),
     url(r'^group/(?P<group_id>[0-9]+)/$', views.group, name='group'),
+    url(r'^sumpts/(?P<group_id>[0-9]+)/$', views.sumpts, name='sumpts'),
     url(r'^bets/game/(?P<group_id>[0-9]+)/(?P<game_id>[0-9]+)$', views.bets_single_game, name='bets/game'),
     url(r'^bets/round/(?P<group_id>[0-9]+)/(?P<round>[0-9]+)$', views.bets_single_round, name='bets/round'),
     url(r'^bets/all/(?P<group_id>[0-9]+)$', views.bets_all, name='bets/all'),
