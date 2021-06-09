@@ -156,7 +156,7 @@ def score_points(game):
             pts = 3 if h_score==h_bet else 1
         elif d_bet*d_score>0:
             if d_score==d_bet:
-                pts = 3 if h_bet==h_score else 2
+                pts = 3 if h_bet==h_score else 1#2
             else: pts = 1
 
         if bet.is_risk:
